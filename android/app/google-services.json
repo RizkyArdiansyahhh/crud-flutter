@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630861401854",
+    "project_id": "authentication-demo-12c2a",
+    "storage_bucket": "authentication-demo-12c2a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630861401854:android:81cf456849f3f4cffb9faf",
+        "android_client_info": {
+          "package_name": "com.riski.crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcu7IDPmqbhlk3cT2LVfHoxshSXFdYc8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
