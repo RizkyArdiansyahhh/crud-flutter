@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crud/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,6 +25,28 @@ class MainPage extends StatelessWidget {
             ListView(
               children: [
                 //// VIEW DATA HERE
+                FutureBuilder<QuerySnapshot>(
+                    future: users.get(),
+                    builder: (_, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Text("Loading...");
+                      } else if (snapshot.hasError) {
+                        return Text("error : ${snapshot.error}");
+                      } else if (snapshot.hasData && snapshot.data != null) {
+                        return Column(
+                          children: snapshot.data?.docs.map((e) {
+                                final data = e.data() as Map<String, dynamic>;
+                                return ItemCard(
+                                  data['username'],
+                                  data['age'],
+                                );
+                              }).toList() ??
+                              [],
+                        );
+                      } else {
+                        return Text("No Data");
+                      }
+                    }),
                 SizedBox(
                   height: 150,
                 )
@@ -80,6 +103,21 @@ class MainPage extends StatelessWidget {
                             users.add({
                               'username': nameController.text,
                               'age': int.tryParse(ageController.text) ?? 0,
+                            }).then((value) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Data Berhasil Ditambahkan"),
+                                      actions: [
+                                        TextButton(
+                                          child: Text("OK"),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                        )
+                                      ],
+                                    );
+                                  });
                             });
                             nameController.clear();
                             ageController.clear();
