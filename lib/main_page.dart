@@ -25,8 +25,8 @@ class MainPage extends StatelessWidget {
             ListView(
               children: [
                 //// VIEW DATA HERE
-                FutureBuilder<QuerySnapshot>(
-                    future: users.get(),
+                StreamBuilder(
+                    stream: users.snapshots(),
                     builder: (_, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Text("Loading...");
